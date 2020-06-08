@@ -1,0 +1,98 @@
+namespace zadanie2
+{
+    public partial class Form1 : Form
+    {
+        public class Translation
+        {        
+         char[,] massChar ={ 
+                           {'a','а'},
+                           {'b','б'},
+                           {'c','с'},
+                           {'d','д'},
+                           {'e','е'},
+                           {'f','ф'},
+                           {'g','г'},
+                           {'h','х'},
+                           {'i','и'},
+                           {'j','j'}, 
+                           {'k','к'},
+                           {'l','л'},
+                           {'m','м'},
+                           {'n','н'},
+                           {'o','о'},
+                           {'p','п'},
+                           {'q','q'}, 
+                           {'r','р'},
+                           {'s','с'},
+                           {'t','т'},
+                           {'u','у'},
+                           {'v','в'},
+                           {'w','w'}, 
+                           {'x','х'}, 
+                           {'y','у'}, 
+                           {'z','з'}                       
+                           }; 
+ 
+        
+         string[,] massDiph = {
+                              {"ya", "я"},
+                              {"Ya", "Я"},
+                               {"ph", "ф"},
+                               {"Ph", "Ф"}                                                      
+                              };
+      
+       
+         private void transWords(ref string text)
+         {
+             string[] words = text.Split();
+ 
+             for (int i = 0; i < words.Length; i++)
+             {
+                 string word = words[i].Split(new[] { ' ', '"', '.', ',', '!', '?', '(', ')', '№' })[0]; 
+ 
+                 for (int j = 0; j < massWords.Length / 2; j++)
+                 {
+                     if (word == massWords[j,0])
+                     { words[i] = words[i].Replace(massWords[j, 0], massWords[j, 1]);}
+                 }
+ 
+             }
+ 
+ 
+             text = string.Empty;
+             foreach (string word in words)
+             {
+                 text += word + " ";
+             }
+ 
+ 
+         }
+ 
+            public  string Text(string text)
+            {
+ 
+                transDiphthongs(ref text);
+                transWords(ref text);
+                transLowerLetters(ref text);
+                transUpperLetters(ref text);
+ 
+              return text;
+ 
+            }
+        }
+ 
+        public Form1()
+        {
+            InitializeComponent();
+        }
+ 
+ 
+ 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Translation translation = new Translation();
+            
+            richTextBox2.Text = translation.Text(richTextBox1.Text);
+        }
+    }
+}
